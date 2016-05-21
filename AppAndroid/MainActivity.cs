@@ -34,8 +34,11 @@ namespace AppAndroid
 
             myListView = FindViewById<ListView>(Resource.Id.namesList);
 
-            ArrayAdapter<string> adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, myNames);
+            //ArrayAdapter<string> adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, myNames);
 
+            MyListViewAdapter adapter = new MyListViewAdapter(this, myNames);
+            //string indexerText = adapter.myItems[1];
+            
             myListView.Adapter = adapter;
 
         }
