@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Android.App;
 using Android.Content;
 using Android.Runtime;
@@ -6,13 +7,15 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 
+
 namespace AppAndroid
 {
+
     [Activity(Label = "AppAndroid", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
-        int count = 1;
-
+        private List<string> myNames;
+        private ListView myListView;
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
@@ -20,11 +23,21 @@ namespace AppAndroid
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
 
-            // Get our button from the layout resource,
-            // and attach an event to it
-            Button button = FindViewById<Button>(Resource.Id.MyButton);
+            TextView textView = FindViewById<TextView>(Resource.Id.myName);
+            textView.Text += "and my name is Vasya!";
 
-            button.Click += delegate { button.Text = string.Format("{0} clicks!", count++); };
+
+            myNames = new List<string>();
+            myNames.Add("Vasya");
+            myNames.Add("Petya");
+            myNames.Add("Katya");
+
+            myListView = FindViewById<ListView>(Resource.Id.namesList);
+
+            ArrayAdapter<string> adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, myNames);
+
+            myListView.Adapter = adapter;
+
         }
     }
 }
