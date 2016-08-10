@@ -14,8 +14,6 @@ namespace AppAndroid
     [Activity(Label = "AppAndroid", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
-        private List<string> myNames;
-        private ListView myListView;
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
@@ -25,22 +23,13 @@ namespace AppAndroid
 
             TextView textView = FindViewById<TextView>(Resource.Id.myName);
             textView.Text += "and my name is Vasya!";
+            Button btnGo = FindViewById<Button>(Resource.Id.btnGo);
+            btnGo.Click += BtnGo_Click;
+        }
 
-
-            myNames = new List<string>();
-            myNames.Add("Vasya");
-            myNames.Add("Petya");
-            myNames.Add("Katya");
-
-            myListView = FindViewById<ListView>(Resource.Id.namesList);
-
-            //ArrayAdapter<string> adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, myNames);
-
-            MyListViewAdapter adapter = new MyListViewAdapter(this, myNames);
-            //string indexerText = adapter.myItems[1];
-            
-            myListView.Adapter = adapter;
-
+        private void BtnGo_Click(object sender, EventArgs e)
+        {
+            StartActivity(typeof(Second_page_Activity));
         }
     }
 }

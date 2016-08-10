@@ -13,12 +13,12 @@ using Android.Widget;
 namespace AppAndroid
 {
     
-    class MyListViewAdapter : BaseAdapter<string>
+    class MyListViewAdapter : BaseAdapter<Pattern>
     {
-        public List<string> myItems;
+        public List<Pattern> myItems;
         private Context myContext;
 
-        public MyListViewAdapter(Context context, List<string> items)
+        public MyListViewAdapter(Context context, List<Pattern> items)
         {
             myItems = items;
             myContext = context;
@@ -34,7 +34,7 @@ namespace AppAndroid
             return position;
         }
         
-        public override string this[int position]
+        public override Pattern this[int position]
         {
             get { return myItems[position]; }
         }
@@ -47,8 +47,12 @@ namespace AppAndroid
                 row = LayoutInflater.From(myContext).Inflate(Resource.Layout.llistview_row, null, false);
             }
 
-            TextView txtName = row.FindViewById<TextView>(Resource.Id.txtViewNames);
-            txtName.Text = myItems[position];
+            TextView txtName = row.FindViewById<TextView>(Resource.Id.txtViewName);
+            txtName.Text = myItems[position].Name;
+
+            ImageView imageView = row.FindViewById<ImageView>(Resource.Id.imageBox);
+            imageView.SetImageResource(myItems[position].imageid);
+
 
             return row;
         }
